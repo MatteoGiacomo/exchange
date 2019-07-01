@@ -52,17 +52,17 @@ export const fetchRates = (base = 'USD') => async dispatch => {
 const pocketsMock = [
 	{
 		currencyCode: 'USD',
-		balance: 300,
+		balance: '300',
 		symbol: '$'
 	},
 	{
 		currencyCode: 'GBP',
-		balance: 1200,
+		balance: '1200',
 		symbol: '£'
 	},
 	{
 		currencyCode: 'EUR',
-		balance: 600,
+		balance: '600',
 		symbol: '€'
 	}
 ]

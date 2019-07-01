@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import './App.css'
 import Pocket from 'components/Pocket/Pocket'
 import {
@@ -17,7 +18,7 @@ const normalizeNumb = value => {
     case 'string':
       return parseFloat(value).toFixed(2)
     case 'number':
-      return parseFloat(value.toFixed(2))
+      return value ? value.toFixed(2) : ''
     default:
       return null
   }
@@ -217,6 +218,18 @@ class App extends Component {
     }
 
   }
+}
+
+App.propTypes = {
+  exchange: PropTypes.object,
+  pockets: PropTypes.array,
+  rates: PropTypes.object,
+  fetchPockets: PropTypes.func,
+  fetchRates: PropTypes.func,
+  updateExchange: PropTypes.func,
+  setExchangeInput: PropTypes.func,
+  setExchangePocket: PropTypes.func,
+  setPocketBalance: PropTypes.func,
 }
 
 const mapStateToProps = ({rates, exchange, pockets }) => ({ rates, exchange, pockets })

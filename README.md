@@ -23,8 +23,7 @@ You will also see any lint errors in the console.
 
 Launches the test runner in the interactive watch mode.<br>
 
-###next steps:
+### next steps:
 - refactor App.js --> avoid setTimeout, make setComponentState more readable 
 - implement unit tests with Jest
 - refactor css --> add sass
-- implement Flow as type checking

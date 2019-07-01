@@ -8,7 +8,6 @@ import reducers from 'reducers/index'
 import thunk from 'redux-thunk'
 
 const store = createStore(reducers, applyMiddleware(thunk))
-console.log('testing state: ', store.getState())
 
 ReactDOM.render((
 		<Provider store={store}>

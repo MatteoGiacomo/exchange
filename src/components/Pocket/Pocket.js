@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Pocket.css';
+import PropTypes from 'prop-types'
 import Dropdown from 'components/Dropdown/Dropdown'
 
 const FLOAT_DIGITS_REGEXP = new RegExp(/^[0-9]{0,9}\.?[0-9]{0,2}$/g)
@@ -37,4 +38,13 @@ export default class Pocket extends Component {
 			</div>
 		)
 	}
+}
+
+Pocket.propTypes = {
+	balance: PropTypes.string,
+	pockets: PropTypes.array,
+	symbol: PropTypes.string,
+	label: PropTypes.string,
+	inputValue: PropTypes.string,
+	onChangeOption: PropTypes.func
 }
