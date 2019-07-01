@@ -7,7 +7,6 @@ import {
 export default (state = {}, action) => {
 	switch(action.type) {
 		case UPDATE_EXCHANGE:
-			console.log('test update exchange: ', action.payload)
 			return {
 				from: {
 					...action.payload[0],

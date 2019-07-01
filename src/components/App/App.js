@@ -108,7 +108,7 @@ class App extends Component {
     const isFrom = section === 'from'
     const change = normalizeNumb((isFrom ? (value * rate) : (value / rate))) || ''
 
-    this.onChangeInput(isFrom ? 'to' : 'from', change)
+    this.onChangeInput(section, change)
 
     return {
       exchangeFromInput: isFrom ? value : change,
@@ -125,14 +125,14 @@ class App extends Component {
     const rate = this.props.rates[to.currencyCode]
     let newState
 
-    const samePocket = (from.currencyCode === to.currencyCode)
+    const isSamePocket = (from.currencyCode === to.currencyCode)
 
     if (this.state.exchangeFromInput !== from.inputValue) {
       const change = normalizeNumb(from.inputValue * rate) || ''
       newState = {
         exchangeFromInput: from.inputValue,
         exchangeToInput: change,
-        isBalanceAvailable: ((from.balance - normalizeNumb(from.inputValue)) >= 0) && !samePocket
+        isBalanceAvailable: ((from.balance - normalizeNumb(from.inputValue)) >= 0) && !isSamePocket
       }
       this.onChangeInput('to', change)
     }
@@ -141,7 +141,7 @@ class App extends Component {
       newState = {
         exchangeToInput: to.inputValue,
         exchangeFromInput: change,
-        isBalanceAvailable: ((from.balance - change) >= 0) && !samePocket
+        isBalanceAvailable: ((from.balance - change) >= 0) && !isSamePocket
       }
       this.onChangeInput('from', change)
     }

@@ -29,20 +29,20 @@ const RATES = {
 }
 
 /**
- * fetch rates with base passed as argument
- * @param base
+ * fetch rates based on the argument passed
+ * @param base  default: USD
  * @returns {Function}
+ *
+ * TODO return to axios implementation - replace resMock with res
+ * now it returns a mock to test different bases with no limits
  */
 export const fetchRates = (base = 'USD') => async dispatch => {
 	// const res = await axios.get( `${ROOT_URL}&base=${base}`)
-
-	console.log('fetch rates with base: ', base)
 	const resMock = {
 		data: {
 			rates: RATES[base]
 		}
 	}
-
 	dispatch({
 		type: FETCH_RATES,
 		payload: resMock
@@ -67,7 +67,10 @@ const pocketsMock = [
 	}
 ]
 
-
+/**
+ * considering to fetch pocket data from an internal API
+ * @returns {{payload: *[], type: string}}
+ */
 export const fetchPockets = () => ({
 	type: FETCH_POCKETS,
 	payload: pocketsMock
@@ -103,6 +106,13 @@ export const updateExchange = payload => ({
 	payload
 })
 
+/**
+ * set new pocket balance
+ * considering to implement a POST request
+ *
+ * @param payload
+ * @returns {{payload: *, type: string}}
+ */
 export const setPocketBalance = payload => ({
 	type: SET_POCKET_BALANCE,
 	payload

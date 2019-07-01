@@ -5,7 +5,6 @@ import Dropdown from 'components/Dropdown/Dropdown'
 const FLOAT_DIGITS_REGEXP = new RegExp(/^[0-9]{0,9}\.?[0-9]{0,2}$/g)
 
 export default class Pocket extends Component {
-
 	onInputChange (e) {
 		if (e.target.value.match(FLOAT_DIGITS_REGEXP) !== null) {
 			this.props.onChangeInput(e.target.value)
