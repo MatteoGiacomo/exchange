@@ -1,0 +1,33 @@
+.pocket {
+    padding: 30px;
+}
+
+.pocket__inner_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.pocket__inner_box__balance,
+.pocket__inner_box__rate {
+    font-size: 1rem;
+    margin-top: 15px;
+}
+
+.pocket__inner_box__label {
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+.pocket__inner_box__input {
+    text-align: right;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    font-size: 1.5rem;
+    max-width: 170px;
+    background-color: inherit;
+}
+
+.pocket__inner_box__input:focus {
+    outline: none;
+}
