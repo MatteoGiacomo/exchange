@@ -1,7 +1,7 @@
-// import axios from 'axios'
+import axios from 'axios'
 
-// const APP_ID = 'YOUR_APP_KEY'
-// const ROOT_URL = `https://openexchangerates.org/api/latest.json?app_id=${APP_ID}`
+const APP_ID = 'YOUR_APP_KEY'
+const ROOT_URL = `https://openexchangerates.org/api/latest.json?app_id=${APP_ID}`
 
 export const FETCH_RATES = 'FETCH_RATES'
 export const FETCH_POCKETS = 'FETCH_POCKETS'
@@ -10,10 +10,12 @@ export const SET_EXCHANGE_POCKET = 'SET_EXCHANGE_POCKET'
 export const SET_EXCHANGE_INPUT = 'SET_EXCHANGE_INPUT'
 export const SET_POCKET_BALANCE = 'SET_POCKET_BALANCE'
 
-const RATES = {
+/*
+Mocks to simulate Exchange API
+const RATES = () => ({
 	'USD': {
 		GBP: 0.79,
-		EUR: 0.88,
+		EUR: Math.random() * (2 - 0.1) + 0.1,
 		USD: 1
 	},
 	'GBP': {
@@ -26,7 +28,14 @@ const RATES = {
 		GBP: 0.9,
 		EUR: 1
 	}
-}
+})
+
+--> replace resMock with res
+const resMock = {
+	data: {
+		rates: RATES()[base]
+	}
+} */
 
 /**
  * fetch rates based on the argument passed
@@ -37,18 +46,15 @@ const RATES = {
  * now it returns a mock to test different bases with no limits
  */
 export const fetchRates = (base = 'USD') => async dispatch => {
-	// const res = await axios.get( `${ROOT_URL}&base=${base}`)
-	const resMock = {
-		data: {
-			rates: RATES[base]
-		}
-	}
+	const res = await axios.get( `${ROOT_URL}&base=${base}`)
+
 	dispatch({
 		type: FETCH_RATES,
-		payload: resMock
+		payload: res
 	})
 }
 
+// simulate pocket fetch response
 const pocketsMock = [
 	{
 		currencyCode: 'USD',

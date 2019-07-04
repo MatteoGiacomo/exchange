@@ -38,7 +38,6 @@ class App extends Component {
     this.onChangeInput = this.onChangeInput.bind(this)
     this.setComponentState = this.setComponentState.bind(this)
     this.onClickExchangeCta = this.onClickExchangeCta.bind(this)
-    this.setInputState = this.setInputState.bind(this)
   }
 
   /**
@@ -105,30 +104,18 @@ class App extends Component {
     })
   }
 
-  setInputState (section, value, rate) {
-    const isFrom = section === 'from'
-    const change = normalizeNumb((isFrom ? (value * rate) : (value / rate))) || ''
-
-    this.onChangeInput(section, change)
-
-    return {
-      exchangeFromInput: isFrom ? value : change,
-      exchangeToInput: !isFrom ? value : change,
-    }
-  }
-
   /**
    *
    */
-  setComponentState () {
+  setComponentState (prevProps) {
     const from = this.props.exchange.from
     const to = this.props.exchange.to
     const rate = this.props.rates[to.currencyCode]
+    const isSamePocket = (from.currencyCode === to.currencyCode)
+    const isRateUpdated = prevProps.rates[to.currencyCode] !== rate
     let newState
 
-    const isSamePocket = (from.currencyCode === to.currencyCode)
-
-    if (this.state.exchangeFromInput !== from.inputValue) {
+    if ((this.state.exchangeFromInput !== from.inputValue) || isRateUpdated) {
       const change = normalizeNumb(from.inputValue * rate) || ''
       newState = {
         exchangeFromInput: from.inputValue,
@@ -137,7 +124,7 @@ class App extends Component {
       }
       this.onChangeInput('to', change)
     }
-    if (this.state.exchangeToInput !== to.inputValue) {
+    if ((this.state.exchangeToInput !== to.inputValue) || isRateUpdated) {
       const change = normalizeNumb(to.inputValue / rate) || ''
       newState = {
         exchangeToInput: to.inputValue,
@@ -146,7 +133,6 @@ class App extends Component {
       }
       this.onChangeInput('from', change)
     }
-
     this.setState(newState)
   }
 
@@ -212,9 +198,9 @@ class App extends Component {
     setTimeout(() => this.props.updateExchange(this.props.pockets))
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.props.exchange.from) {
-      this.setComponentState()
+      this.setComponentState(prevProps)
     }
 
   }
