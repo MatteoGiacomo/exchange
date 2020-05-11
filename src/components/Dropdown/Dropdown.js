@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types'
 import './Dropdown.css';
 
 
-export default class Dropdown extends Component {
-
-	render () {
-		return (
-			<select
-				onChange={this.props.onChangeOption}
-				className='dropdown'
-				defaultValue={this.props.selected}
-			>
-				{ this.props.pockets.map(p => (
-					<option
-						key={p.currencyCode}
-						value={p.currencyCode}
-					>
-						{ p.currencyCode }
-					</option>
-				)) }
-			</select>
-		)
-	}
+const Dropdown = props => {
+	return (
+		<select
+			className='dropdown'
+			onChange={props.onChangeOption}
+			defaultValue={props.selected}
+		>
+			{ props.pockets.map(p => (
+				<option
+					key={p.currencyCode}
+					value={p.currencyCode}
+				>
+					{ p.currencyCode }
+				</option>
+			)) }
+		</select>
+	)
 }
 
 Dropdown.propTypes = {
@@ -30,3 +27,5 @@ Dropdown.propTypes = {
 	onChangeOption: PropTypes.func,
 	selected: PropTypes.string
 }
+
+export default Dropdown;
